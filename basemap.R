@@ -1,5 +1,25 @@
+##########################################################
+# This file provides a                 
+# reproducible example demonstrating how to use the basemaps
+# package in R, which allows you to use high-quality basemaps 
+# from arcGIS (and other services) without the need for a 
+# token or payment method attached. I tend to prefer to use 
+# basemaps when I'm focusing on smaller spatial extents! 
+# I've chosen two examples for this: one in Lake Iliamna,
+# in southwestern Alaska, and Auke Lake in Southeastern 
+# Alaska.
+# #########################################################
+
+
+
+
+
+
+
+
+
 library(sf)
-install.packages("basemaps")
+#install.packages("basemaps")
 library(basemaps)
 library(terra)
 library(tidyverse)
@@ -23,6 +43,7 @@ get_maptypes()
 #this gives you your map as a raster 
 map <- basemap_terra(ext = iliamna, map_service = "esri", map_type = "world_imagery")
 
+#quick viz to see if you got the extent correct
 plot(map)
 
 
@@ -35,7 +56,9 @@ map <- project(map,"+proj=longlat +datum=WGS84")
 examp <- data.frame(x = -154.1914, y = 59.55361, label = 'Hey!')
 
 #geom_spatraster_rgb is from the tiny terra package and is useful for plotting multicolor rasters! 
-ggplot() + geom_spatraster_rgb(data = map) + geom_point(data = examp, aes(x = x, y = y), color = "red", size =6)
+ggplot() + 
+geom_spatraster_rgb(data = map) + geom_point(data = examp, aes(x = x, y = y), color = "red", size =6) +
+labs (x = "Longitude", y = "Latitude")
 
 
 
@@ -54,7 +77,7 @@ ggplot() +
 #creating an empty raster object! 
 auke <- rast()
 
-#setting the extent of my raster - basically drawing a "map" around my 
+#setting the extent of my raster - basically drawing a box around where I want my map to be! 
 ext(auke) <- c(-134.651674, -134.620304,58.377379,58.395540)
 
 #getting an auke lake basemap! 
@@ -74,7 +97,11 @@ auke_map <- project(auke_map,"+proj=longlat +datum=WGS84")
 
 
 #plotting the auke lake map! 
-ggplot() + geom_spatraster_rgb(data = auke_map) + theme(panel.border = element_blank(), panel.grid.major = element_blank(),panel.grid.minor = element_blank()) + geom_point(data = temps, aes(x = long, y = lat, color = temp), size = 5) + scale_color_viridis_c()
+ggplot() +
+  geom_spatraster_rgb(data = auke_map) +  
+  geom_point(data = temps, aes(x = long, y = lat, color = temp), size = 5) + 
+  scale_color_viridis_c() +  
+  theme(panel.border = element_blank(), panel.grid.major = element_blank(),panel.grid.minor = element_blank()) 
 
 
 

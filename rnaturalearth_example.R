@@ -5,7 +5,8 @@
 # free and does not require a token
 # Personally, I find rnaturalearth provides clean 
 # large scale maps. If your study site is fairly small 
-#check out the basemaps file!
+# check out the basemaps file!
+# This example focuses on Southcentral Alaska. 
 # #########################################################
 
 
@@ -40,7 +41,7 @@ points = data.frame(lat = c(61.19786329324865,58.211526,57.924332), long = c(-14
 
 
 library(ggrepel) # this package is great for adding labels to plots! 
-#
+
 
 #A great thing about rnaturalearth is you can graph it relatively easily! 
 

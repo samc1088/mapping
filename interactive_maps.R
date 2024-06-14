@@ -5,6 +5,8 @@
 # plotly and leaflet packages. 
 # These can be very useful if you decide to publish your work 
 # on a website using something like shiny!
+# this example focuses on the Seward Peninsula and Northern
+# Bering Sea! 
 # #########################################################
 
 
@@ -13,7 +15,7 @@
 
 library(plotly)
 library(sf)
-library(ggplot)
+library(tidyverse)
 library(rnaturalearth)
 library(rnaturalearthdata)
 library(rnaturalearthhires)
